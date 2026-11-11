@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import TombolTema from "@/components/TombolTema";
 
 const menu = [
   { href: "/", label: "Beranda" },
@@ -14,21 +14,6 @@ const menu = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const tersimpan = localStorage.getItem("darkMode") === "true";
-    setDarkMode(tersimpan);
-    document.documentElement.classList.toggle("dark", tersimpan);
-  }, []);
-
-  function toggleDarkMode() {
-    const modeBaru = !darkMode;
-
-    setDarkMode(modeBaru);
-    localStorage.setItem("darkMode", String(modeBaru));
-    document.documentElement.classList.toggle("dark", modeBaru);
-  }
 
   return (
     <header className="bg-utama text-white">
@@ -61,12 +46,7 @@ export default function Navbar() {
             })}
           </ul>
 
-          <button
-            onClick={toggleDarkMode}
-            className="rounded-lg border border-white px-3 py-2 text-sm font-semibold hover:bg-white hover:text-utama"
-          >
-            {darkMode ? "☀️ Terang" : "🌙 Gelap"}
-          </button>
+          <TombolTema />
         </div>
       </nav>
     </header>

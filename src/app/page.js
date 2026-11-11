@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Kartu from "@/components/Kartu";
 import ProyekCard from "@/components/ProyekCard";
 import SkillCard from "@/components/SkillCard";
-import { proyek } from "@/data/proyek";
+import { proyek } from "@/lib/proyek";
 
 const skills = [
   { nama: "HTML", level: "Menengah" },

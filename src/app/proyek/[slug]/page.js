@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { proyek } from "@/data/proyek";
+import { proyek } from "@/lib/proyek";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

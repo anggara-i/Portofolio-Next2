@@ -1,5 +1,5 @@
 
-import { proyek } from "@/data/proyek";
+import { proyek } from "@/lib/proyek";
 import FilterProyek from "@/components/FilterProyek";
 
 export const metadata = {
