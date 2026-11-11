@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Muhammad Abyan Sudjatmiko | Portofolio",
-    template: "%s | Muhammad Abyan",
+    default: "Indra Anggara | Portofolio",
+    template: "%s | Indra Anggara",
   },
   description:
-    "Portofolio Muhammad Abyan Sudjatmiko, siswa calon Junior Web Developer di Kelas Industri UBIG.",
+    "Portofolio Indra Anggara, siswa kelas XI SMK dan calon Vibes Engineer di Kelas Industri UBIG.",
 };
 
 export default function RootLayout({ children }) {

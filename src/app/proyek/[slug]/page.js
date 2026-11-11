@@ -47,23 +47,29 @@ export default async function DetailProyek({ params }) {
         ))}
       </ul>
 
-      <h2 className="mt-8 text-2xl font-bold text-utama">Teknologi</h2>
-      <div className="mt-3 flex flex-wrap gap-2">
-        {item.teknologi.map((t) => (
-          <span key={t} className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-utama border border-gray-200">
-            {t}
-          </span>
-        ))}
-      </div>
+      {item.teknologi.length > 0 && (
+        <>
+          <h2 className="mt-8 text-2xl font-bold text-utama">Teknologi</h2>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {item.teknologi.map((t) => (
+              <span key={t} className="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-semibold text-utama">
+                {t}
+              </span>
+            ))}
+          </div>
+        </>
+      )}
 
-      <a
-        href={item.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-8 inline-block rounded-lg bg-utama px-5 py-2 font-semibold text-white"
-      >
-        Kunjungi website ↗
-      </a>
+      {item.link && (
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-block rounded-lg bg-utama px-5 py-2 font-semibold text-white"
+        >
+          Kunjungi proyek ↗
+        </a>
+      )}
     </main>
   );
 }

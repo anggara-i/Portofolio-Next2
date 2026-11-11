@@ -13,7 +13,7 @@ export default function ProyekCard({ proyek }) {
         width={640}
         height={420}
         loading="eager"
-        className="h-auto w-full"
+        className="aspect-[16/10] w-full bg-gray-50 object-contain"
       />
       <div className="p-5">
         <span className="rounded-full bg-latar px-3 py-1 text-xs font-semibold text-utama">{proyek.kategori}</span>

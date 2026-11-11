@@ -30,6 +30,14 @@ export default function FilterProyek({ dataProyek }) {
     setKataKunci("");
   }
 
+  if (dataProyek.length === 0) {
+    return (
+      <p className="mt-8 rounded-xl border border-gray-200 bg-white p-6 text-center text-gray-700 shadow-sm">
+        Belum ada proyek yang ditampilkan.
+      </p>
+    );
+  }
+
   return (
     <section>
       <div className="mt-8 flex flex-wrap gap-3">

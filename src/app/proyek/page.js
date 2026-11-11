@@ -4,7 +4,7 @@ import FilterProyek from "@/components/FilterProyek";
 
 export const metadata = {
   title: "Proyek",
-  description: "Daftar proyek website karya Muhammad Abyan Sudjatmiko.",
+  description: "Daftar proyek karya Indra Anggara.",
 };
 
 export default function DaftarProyek() {
@@ -15,8 +15,7 @@ export default function DaftarProyek() {
       </h1>
 
       <p className="mt-3 text-lg text-gray-700">
-        Beberapa proyek yang pernah saya kerjakan selama belajar.
-        Klik kartu untuk melihat detailnya.
+        Proyek pribadi akan ditampilkan di halaman ini.
       </p>
 
       <FilterProyek dataProyek={proyek} />

@@ -2,21 +2,15 @@ import Kartu from "@/components/Kartu";
 
 export const metadata = {
   title: "Tentang",
-  description: "Cerita, hobi, cita-cita, dan jadwal belajar Muhammad Abyan Sudjatmiko.",
+  description: "Cerita, hobi, cita-cita, dan jadwal belajar Indra Anggara.",
 };
 
-const hobi = ["Bermain Game", "Berenang", "Traveling"];
-
-const rencana = ["Kuliah", "Mendapatkan Pekerjaan mapan", "Slow living"];
+const hobi = ["Mendaki", "Sepak Bola", "Memancing"];
 
 const jadwal = [
-  { hari: "Senin", kegiatan: "Belajar di sekolah" },
-  { hari: "Selasa", kegiatan: "Belajar pemrograman" },
-  { hari: "Rabu", kegiatan: "Mengerjakan tugas" },
-  { hari: "Kamis", kegiatan: "Belajar pemrograman" },
-  { hari: "Jumat", kegiatan: "Evaluasi pembelajaran" },
-  { hari: "Sabtu", kegiatan: "Beristirahat" },
-  { hari: "Minggu", kegiatan: "Berolahraga" },
+  { hari: "Senin", waktu: "19:00 - 21:00", kegiatan: "PKK" },
+  { hari: "Selasa", waktu: "07:00 - 12:00", kegiatan: "PKK" },
+  { hari: "Rabu", waktu: "18:00 - 20:00", kegiatan: "IOT" },
 ];
 
 export default function Tentang() {
@@ -26,13 +20,9 @@ export default function Tentang() {
 
       <Kartu judul="Perkenalan">
         <p>
-          Saya adalah pelajar SMK Negeri 1 Pasuruan jurusan Rekayasa
-          Perangkat Lunak (RPL) yang memiliki minat besar di bidang
-          teknologi dan pengembangan website. Saya sedang mempelajari
-          HTML, CSS, JavaScript, Next.js, serta desain UI/UX untuk
-          meningkatkan kemampuan saya. Saya juga senang mencoba hal baru,
-          mengerjakan proyek, dan mengembangkan portofolio sebagai langkah
-          untuk menjadi Web Developer yang profesional.
+          Saya tinggal di Kota Pasuruan dan saya senang mencoba hal baru di
+          dunia teknologi. Saya ingin bisa membuat web yang bermanfaat untuk
+          sekolah dan UMKM sekitar rumah.
         </p>
       </Kartu>
 
@@ -47,14 +37,10 @@ export default function Tentang() {
 
         <Kartu judul="Cita-cita">
           <p className="mb-2">
-            Menjadi <strong>Full Stack Web Developer</strong>. Langkah
-            yang saya rencanakan:
+            Saya ingin menjadi seorang <strong>Web Developer</strong> dan
+            sukses di dunia trading demi mewujudkan impian{" "}
+            <strong>Financial Freedom</strong>.
           </p>
-          <ol className="list-decimal space-y-1 pl-5">
-            {rencana.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ol>
         </Kartu>
       </div>
 
@@ -64,6 +50,7 @@ export default function Tentang() {
             <thead className="bg-utama text-white">
               <tr>
                 <th className="p-3">Hari</th>
+                <th className="p-3">Waktu</th>
                 <th className="p-3">Kegiatan</th>
               </tr>
             </thead>
@@ -71,6 +58,7 @@ export default function Tentang() {
               {jadwal.map((item) => (
                 <tr key={item.hari} className="border-b border-gray-200">
                   <td className="p-3 font-medium">{item.hari}</td>
+                  <td className="p-3">{item.waktu}</td>
                   <td className="p-3">{item.kegiatan}</td>
                 </tr>
               ))}

@@ -3,8 +3,7 @@ import FormKontak from "@/components/FormKontak";
 
 export const metadata = {
   title: "Kontak",
-  description:
-    "Hubungi Muhammad Abyan Sudjatmiko melalui form kontak, email, atau GitHub.",
+  description: "Hubungi Indra Anggara melalui formulir kontak.",
 };
 
 export default function Kontak() {
@@ -18,38 +17,8 @@ export default function Kontak() {
         Isi form di bawah ini untuk menghubungi saya.
       </p>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:col-span-2">
-          <FormKontak />
-        </div>
-
-        <aside className="h-fit rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-3 text-2xl font-bold text-utama">
-            Temukan Saya di
-          </h2>
-
-          <ul className="space-y-2">
-            <li>
-              <a
-                href="https://github.com/abyansudjatmiko00-cloud"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-aksen hover:underline"
-              >
-                GitHub
-              </a>
-            </li>
-
-            <li>
-              <a
-                href="mailto:abyansudjatmiko00@gmail.com"
-                className="font-semibold text-aksen hover:underline"
-              >
-                Email
-              </a>
-            </li>
-          </ul>
-        </aside>
+      <div className="mt-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <FormKontak />
       </div>
     </main>
   );

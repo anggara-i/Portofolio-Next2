@@ -34,7 +34,7 @@ export default function Navbar() {
     <header className="bg-utama text-white">
       <nav className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 md:flex-row md:items-center md:justify-between">
         <Link href="/" className="text-xl font-bold">
-          Muhammad Abyan
+          Indra Anggara
         </Link>
 
         <div className="flex flex-wrap items-center gap-4">
