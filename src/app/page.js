@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Kartu from "@/components/Kartu";
 import ProyekCard from "@/components/ProyekCard";
 import SkillCard from "@/components/SkillCard";
-import { proyek } from "@/lib/proyek";
+import { proyek } from "@/data/proyek";
 
 const skills = [
   { nama: "HTML", level: "Menengah" },
@@ -32,7 +32,7 @@ export default function Home() {
       </Kartu>
 
       <section className="mt-10">
-        <h2 className="mb-4 text-2xl font-bold text-utama">Proyek Terbaru</h2>
+        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-gray-100">Proyek Terbaru</h2>
         {proyekTerbaru.length > 0 ? (
           <>
             <div className="grid gap-6 md:grid-cols-3">
@@ -48,7 +48,7 @@ export default function Home() {
             </Link>
           </>
         ) : (
-          <p className="rounded-xl border border-gray-200 bg-white p-6 text-gray-700 shadow-sm">
+          <p className="rounded-xl border border-gray-200 bg-white p-6 text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
             Proyek pribadi akan ditambahkan di sini.
           </p>
         )}

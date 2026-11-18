@@ -1,93 +1,138 @@
-
 "use client";
 
 import { useState } from "react";
 import ProyekCard from "@/components/ProyekCard";
 
-export default function FilterProyek({ dataProyek }) {
-  const [kategoriAktif, setKategoriAktif] = useState("Semua");
-  const [kataKunci, setKataKunci] = useState("");
+const daftarKategori = ["Semua", "HTML", "CSS", "Next.js"];
+const tombolBiasa = "rounded-full border border-utama dark:border-sky-200 px-4 py-2 text-sm font-semibold text-utama dark:text-sky-200 transition hover:bg-utama hover:text-white";
+const tombolAktif = "rounded-full border border-aksen bg-aksen px-4 py-2 text-sm font-semibold text-white";
 
-  const daftarKategori = [
-    "Semua",
-    ...new Set(dataProyek.map((item) => item.kategori)),
-  ];
+export default function FilterProyek({ proyek = [] }) {
+  const [kategori, setKategori] = useState("Semua");
+  const [kata, setKata] = useState("");
 
-  const hasilFilter = dataProyek.filter((item) => {
+  const hasil = proyek.filter((p) => {
+    // Mengambil teknologi proyek
+  const teknologi = Array.isArray(p.teknologi)
+      ? p.teknologi
+      : String(p.teknologi || "").split(",");
+
+    const daftarTeknologi = teknologi.map((item) =>
+      String(item).trim().toLowerCase()
+    );
+
+    // Pencarian kategori
     const cocokKategori =
-      kategoriAktif === "Semua" ||
-      item.kategori === kategoriAktif;
+      kategori === "Semua" ||
+      String(p.kategori || "").toLowerCase() ===
+        kategori.toLowerCase() ||
+      daftarTeknologi.some((item) =>
+        item.includes(kategori.toLowerCase())
+      );
 
-    const cocokPencarian =
-      item.judul.toLowerCase().includes(kataKunci.toLowerCase()) ||
-      item.deskripsi.toLowerCase().includes(kataKunci.toLowerCase());
+    // Pencarian judul dan deskripsi
+    const judul = String(
+      p.judul || p.nama_project || ""
+    ).toLowerCase();
 
-    return cocokKategori && cocokPencarian;
+    const deskripsi = String(
+      p.deskripsi || ""
+    ).toLowerCase();
+
+    const kataKecil = kata.trim().toLowerCase();
+
+    const cocokJudul = judul.includes(kataKecil);
+    const cocokDeskripsi = deskripsi.includes(kataKecil);
+
+    const cocokKata =
+      kataKecil === "" ||
+      cocokJudul ||
+      cocokDeskripsi ||
+      daftarTeknologi.some((item) =>
+        item.includes(kataKecil)
+      );
+
+    return cocokKategori && cocokKata;
   });
 
-  function bersihkanFilter() {
-    setKategoriAktif("Semua");
-    setKataKunci("");
-  }
-
-  if (dataProyek.length === 0) {
-    return (
-      <p className="mt-8 rounded-xl border border-gray-200 bg-white p-6 text-center text-gray-700 shadow-sm">
-        Belum ada proyek yang ditampilkan.
-      </p>
-    );
-  }
-
   return (
-    <section>
-      <div className="mt-8 flex flex-wrap gap-3">
-        {daftarKategori.map((kategori) => (
+    <div className="mt-8">
+
+      {/* Tombol Kategori */}
+      <div className="flex flex-wrap gap-2">
+        {daftarKategori.map((k) => (
           <button
-            key={kategori}
-            onClick={() => setKategoriAktif(kategori)}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-              kategoriAktif === kategori
-                ? "bg-utama text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
+            key={k}
+            type="button"
+            onClick={() => setKategori(k)}
+            className={
+              kategori === k ? tombolAktif : tombolBiasa
+            }
           >
-            {kategori}
+            {k}
           </button>
         ))}
       </div>
 
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+      {/* Kotak Pencarian */}
+      <div className="mt-6">
+
+        <label
+          htmlFor="cari"
+          className="block font-semibold"
+        >
+          Cari proyek
+        </label>
+
         <input
+          id="cari"
           type="text"
-          value={kataKunci}
-          onChange={(e) => setKataKunci(e.target.value)}
-          placeholder="Cari nama atau deskripsi proyek..."
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-utama"
+          value={kata}
+          onChange={(e) => setKata(e.target.value)}
+          placeholder="Cari judul atau deskripsi proyek..."
+          className="mt-2 w-full max-w-md rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 outline-none focus:border-blue-500"
         />
 
-        <button
-          onClick={bersihkanFilter}
-          className="rounded-lg bg-aksen px-5 py-3 font-semibold text-white hover:opacity-90"
-        >
-          Reset
-        </button>
+        {/* Kode 6.6: Tombol Hapus Pencarian */}
+        {kata !== "" && (
+          <button
+            type="button"
+            onClick={() => setKata("")}
+            className="mt-2 text-sm font-semibold text-aksen dark:text-red-300 hover:underline"
+          >
+            Hapus pencarian
+          </button>
+        )}
+
+        {/* Kode 6.7: Jumlah Hasil */}
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+          Menampilkan {hasil.length} dari {proyek.length} proyek
+        </p>
+
       </div>
 
-      <p className="mt-5 text-sm text-gray-600">
-        Menampilkan {hasilFilter.length} proyek.
-      </p>
+      {/* Daftar Proyek */}
+      {hasil.length > 0 ? (
+        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
-      {hasilFilter.length > 0 ? (
-        <div className="mt-5 grid gap-6 md:grid-cols-3">
-          {hasilFilter.map((item) => (
-            <ProyekCard key={item.slug} proyek={item} />
+          {hasil.map((item) => (
+            <ProyekCard
+              key={
+                item.slug ||
+                item.id_project ||
+                item.id
+              }
+              proyek={item}
+            />
           ))}
+
         </div>
       ) : (
-        <p className="mt-6 rounded-lg bg-gray-100 p-6 text-center text-gray-600">
-          Proyek tidak ditemukan.
+        <p className="mt-6 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 p-6 text-center text-gray-500">
+          Belum ada proyek yang cocok.
         </p>
       )}
-    </section>
+
+    </div>
   );
 }

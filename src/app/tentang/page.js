@@ -16,7 +16,7 @@ const jadwal = [
 export default function Tentang() {
   return (
     <main className="mx-auto w-full max-w-5xl space-y-6 px-4 py-10">
-      <h1 className="text-3xl font-bold text-utama md:text-4xl">Tentang Saya</h1>
+      <h1 className="text-3xl font-bold text-utama md:text-4xl dark:text-gray-100">Tentang Saya</h1>
 
       <Kartu judul="Perkenalan">
         <p>
@@ -47,7 +47,7 @@ export default function Tentang() {
       <Kartu judul="Jadwal Belajar">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-utama text-white">
+            <thead className="bg-utama text-white dark:bg-gray-800">
               <tr>
                 <th className="p-3">Hari</th>
                 <th className="p-3">Waktu</th>
@@ -56,7 +56,7 @@ export default function Tentang() {
             </thead>
             <tbody>
               {jadwal.map((item) => (
-                <tr key={item.hari} className="border-b border-gray-200">
+                <tr key={item.hari} className="border-b border-gray-200 dark:border-gray-700">
                   <td className="p-3 font-medium">{item.hari}</td>
                   <td className="p-3">{item.waktu}</td>
                   <td className="p-3">{item.kegiatan}</td>
