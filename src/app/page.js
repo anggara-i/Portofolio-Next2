@@ -1,57 +1,81 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
-import Kartu from "@/components/Kartu";
 import ProyekCard from "@/components/ProyekCard";
 import SkillCard from "@/components/SkillCard";
-import { proyek } from "@/data/proyek";
+import { buttonVariants } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
 
-const skills = [
-  { nama: "HTML", level: "Menengah" },
-  { nama: "CSS", level: "Menengah" },
-  { nama: "Git dan GitHub", level: "Dasar" },
-  { nama: "Desain Poster dengan Canva", level: "Menengah" },
-  { nama: "JavaScript", level: "Dasar" },
-];
+export const metadata = {
+  title: "Beranda",
+  description:
+    "Portofolio Indra Anggara Putra, siswa Rekayasa Perangkat Lunak dan calon Vibes Engineer.",
+};
 
-const proyekTerbaru = proyek.slice(-3);
+export default async function Home() {
+  const { data: skills } = await supabase
+    .from("skills")
+    .select("*")
+    .order("id");
+  const { data: proyekTerbaru, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(3);
 
-export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-5xl space-y-6 px-4 py-10">
+    <main className="mx-auto w-full min-w-0 max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
       <Hero
-        nama="Indra Anggara"
-        tagline="Siswa kelas XI SMK, calon Vibes Engineer di Kelas Industri UBIG."
+        nama="Indra Anggara Putra"
+        tagline="Siswa Kelas XI SMK Jurusan Rekayasa Perangkat Lunak, calon Vibes Engineer Kelas Industri UBIG."
       />
 
-      <Kartu judul="Keahlian">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {skills.map((skill) => (
-            <SkillCard key={skill.nama} nama={skill.nama} level={skill.level} />
+      <section className="mt-8 w-full min-w-0 sm:mt-10">
+        <h2 className="mb-4 break-words text-xl font-bold text-primary sm:text-2xl">
+          Keahlian
+        </h2>
+
+        <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {skills && skills.map((skill) => (
+            <SkillCard
+              key={skill.id}
+              nama={skill.nama}
+              level={skill.level}
+            />
           ))}
         </div>
-      </Kartu>
+      </section>
 
-      <section className="mt-10">
-        <h2 className="mb-4 text-2xl font-bold text-utama dark:text-gray-100">Proyek Terbaru</h2>
-        {proyekTerbaru.length > 0 ? (
-          <>
-            <div className="grid gap-6 md:grid-cols-3">
-              {proyekTerbaru.map((item) => (
-                <ProyekCard key={item.slug} proyek={item} />
-              ))}
-            </div>
-            <Link
-              href="/proyek"
-              className="mt-6 inline-block rounded-lg bg-utama px-5 py-2 font-semibold text-white"
-            >
-              Lihat semua proyek
-            </Link>
-          </>
-        ) : (
-          <p className="rounded-xl border border-gray-200 bg-white p-6 text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">
-            Proyek pribadi akan ditambahkan di sini.
+      <section className="mt-8 w-full min-w-0 sm:mt-10">
+        <h2 className="mb-4 break-words text-xl font-bold text-primary sm:text-2xl">
+          Proyek Terbaru
+        </h2>
+
+        {error && (
+          <p className="rounded-xl border border-dashed border-input p-6 text-center text-aksen">
+            Proyek terbaru gagal dimuat: {error.message}
           </p>
         )}
+
+        {!error && (!proyekTerbaru || proyekTerbaru.length === 0) && (
+          <p className="rounded-xl border border-dashed border-input p-6 text-center text-muted-foreground">
+            Belum ada proyek di database.
+          </p>
+        )}
+
+        {!error && proyekTerbaru && proyekTerbaru.length > 0 && (
+          <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {proyekTerbaru.map((item) => (
+              <ProyekCard key={item.slug} proyek={item} />
+            ))}
+          </div>
+        )}
+
+        <Link
+          href="/proyek"
+          className={buttonVariants({ size: "lg", className: "mt-6" })}
+        >
+          Lihat semua proyek
+        </Link>
       </section>
     </main>
   );

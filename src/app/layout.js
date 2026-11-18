@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Indra Anggara | Portofolio",
-    template: "%s | Indra Anggara",
+    default: "Indra Anggara Putra | Portofolio",
+    template: "%s | Indra Anggara Putra",
   },
   description:
-    "Portofolio Indra Anggara, siswa kelas XI SMK dan calon Vibes Engineer di Kelas Industri UBIG.",
+    "Portofolio Indra Anggara Putra, siswa kelas XI SMK dan calon Vibes Engineer di Kelas Industri UBIG.",
 };
 
 export default function RootLayout({ children }) {

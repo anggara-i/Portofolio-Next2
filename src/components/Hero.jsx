@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Hero({ nama, tagline }) {
   return (
@@ -6,20 +8,39 @@ export default function Hero({ nama, tagline }) {
       <Image
         src="/foto-profil.png"
         alt={`Foto profil ${nama}`}
-        width={180}
-        height={180}
+        width={200}
+        height={200}
         loading="eager"
-        className="h-[180px] w-[180px] shrink-0 rounded-full border-4 border-aksen object-cover object-center"
+        className="h-[180px] w-[180px] rounded-full border-4 border-aksen object-cover"
       />
 
       <div>
-        <h1 className="text-3xl font-bold text-utama md:text-5xl dark:text-gray-100">
-          Halo, saya {nama}
+        <h1 className="text-3xl font-bold text-primary md:text-5xl">
+          Halo, saya {nama}!
         </h1>
 
-        <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
+        <p className="mt-3 text-lg leading-relaxed text-muted-foreground">
           {tagline}
         </p>
+
+        <div className="mt-5 flex justify-center gap-3 md:justify-start">
+          <Link
+            href="/proyek"
+            className={buttonVariants({ size: "lg" })}
+          >
+            Lihat Proyek
+          </Link>
+
+          <Link
+            href="/kontak"
+            className={buttonVariants({
+              variant: "outline",
+              size: "lg",
+            })}
+          >
+            Hubungi Saya
+          </Link>
+        </div>
       </div>
     </section>
   );

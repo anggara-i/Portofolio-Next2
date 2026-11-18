@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import ProyekCard from "@/components/ProyekCard";
+import { Button } from "@/components/ui/button";
 
 const daftarKategori = ["Semua", "HTML", "CSS", "Next.js"];
-const tombolBiasa = "rounded-full border border-utama dark:border-sky-200 px-4 py-2 text-sm font-semibold text-utama dark:text-sky-200 transition hover:bg-utama hover:text-white";
-const tombolAktif = "rounded-full border border-aksen bg-aksen px-4 py-2 text-sm font-semibold text-white";
 
 export default function FilterProyek({ proyek = [] }) {
   const [kategori, setKategori] = useState("Semua");
@@ -61,16 +60,9 @@ export default function FilterProyek({ proyek = [] }) {
       {/* Tombol Kategori */}
       <div className="flex flex-wrap gap-2">
         {daftarKategori.map((k) => (
-          <button
-            key={k}
-            type="button"
-            onClick={() => setKategori(k)}
-            className={
-              kategori === k ? tombolAktif : tombolBiasa
-            }
-          >
-            {k}
-          </button>
+          <Button key={k} variant={kategori === k ? "default" : "outline"} onClick={() => setKategori(k)}>
+              {k}
+          </Button>
         ))}
       </div>
 
@@ -94,15 +86,9 @@ export default function FilterProyek({ proyek = [] }) {
         />
 
         {/* Kode 6.6: Tombol Hapus Pencarian */}
-        {kata !== "" && (
-          <button
-            type="button"
-            onClick={() => setKata("")}
-            className="mt-2 text-sm font-semibold text-aksen dark:text-red-300 hover:underline"
-          >
-            Hapus pencarian
-          </button>
-        )}
+        <Button variant="link" onClick={() => setKata("")} className="mt-2 px-0 text-aksen">
+          Hapus pencarian
+        </Button>
 
         {/* Kode 6.7: Jumlah Hasil */}
         <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">

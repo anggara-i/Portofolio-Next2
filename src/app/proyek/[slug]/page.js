@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { proyek } from "@/data/proyek";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/lib/supabase";
+
+async function ambilProyek(slug) {
+  const { data } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+  return data;
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const item = proyek.find((p) => p.slug === slug);
+  const item = await ambilProyek(slug);
 
   if (!item) {
     return { title: "Proyek tidak ditemukan" };
@@ -15,61 +26,50 @@ export async function generateMetadata({ params }) {
 
 export default async function DetailProyek({ params }) {
   const { slug } = await params;
-  const item = proyek.find((p) => p.slug === slug);
+  const item = await ambilProyek(slug);
 
   if (!item) {
     notFound();
   }
 
+  const fitur = Array.isArray(item.fitur)
+    ? item.fitur
+    : typeof item.fitur === "string" && item.fitur.trim()
+      ? item.fitur
+          .replace(/^[("]+|[")]+$/g, "")
+          .split(/[,|\n]/)
+          .map((nilai) => nilai.trim())
+          .filter(Boolean)
+      : [];
+  const teknologi = Array.isArray(item.teknologi) ? item.teknologi : [];
+
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-10">
-      <Link href="/proyek" className="text-sm font-semibold text-aksen hover:underline dark:text-red-400">
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      <Link href="/proyek" className="text-sm font-semibold text-aksen hover:underline">
         &larr; Kembali ke daftar proyek
       </Link>
-      <h1 className="mt-4 text-3xl font-bold text-utama md:text-4xl dark:text-gray-100">{item.judul}</h1>
-      <p className="mt-2 text-gray-600 dark:text-gray-400">
-        {item.kategori} &middot; Dibuat tahun {item.tahun}
-      </p>
-      <Image
-        src={item.gambar}
+      <h1 className="mt-4 text-3xl font-bold text-primary md:text-4xl">{item.judul}</h1>
+      <div className="mt-3 flex items-center gap-3">
+      <Badge>{item.kategori}</Badge>
+      <span className="text-muted-foreground">Dibuat di {item.minggu}</span>
+      </div>  
+        <image
+        src={item.gambar_url}
         alt={`Tangkapan layar ${item.judul}`}
         width={640}
         height={420}
         loading="eager"
-        className="mt-6 h-auto w-full rounded-xl border border-gray-200 dark:border-gray-700"
+        className="mt-6 h-auto w-full rounded-xl border border-border"
+
       />
       <p className="mt-6 text-lg">{item.deskripsi}</p>
-
-      <h2 className="mt-8 text-2xl font-bold text-utama dark:text-gray-100">Fitur Utama</h2>
+      <Separator className="my-8" />
+      <h2 className="text-2xl font-bold text-primary">Yang Saya Pelajari</h2>
       <ul className="mt-3 list-disc pl-5">
         {item.fitur.map((f) => (
           <li key={f}>{f}</li>
         ))}
       </ul>
-
-      {item.teknologi.length > 0 && (
-        <>
-          <h2 className="mt-8 text-2xl font-bold text-utama dark:text-gray-100">Teknologi</h2>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {item.teknologi.map((t) => (
-              <span key={t} className="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-semibold text-utama dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                {t}
-              </span>
-            ))}
-          </div>
-        </>
-      )}
-
-      {item.link && (
-        <a
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 inline-block rounded-lg bg-utama px-5 py-2 font-semibold text-white"
-        >
-          Kunjungi proyek ↗
-        </a>
-      )}
     </main>
   );
 }

@@ -9,12 +9,8 @@ Daftar proyek portofolio Andi Pratama.
 | Kolom | Tipe | Keterangan |
 | --- | --- | --- |
 | `id` | `int8` | Primary key, nomor otomatis 1, 2, 3, ... |
-| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis
-dengan `now()` |
-
-| `slug` | `text` | Penanda unik di alamat, misalnya `halaman-
-profil` (unik) |
-
+| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis dengan `now()` |
+| `slug` | `text` | Penanda unik di alamat, misalnya `halaman-profil` (unik) |
 | `judul` | `text` | Judul proyek |
 | `deskripsi` | `text` | Kalimat singkat tentang proyek |
 | `kategori` | `text` | HTML, CSS, atau JavaScript |
@@ -32,8 +28,7 @@ Modul P1-W13 Supabase dan Konsep Backend as a Service 46
 | Kolom | Tipe | Keterangan |
 | --- | --- | --- |
 | `id` | `int8` | Primary key, nomor otomatis 1, 2, 3, ... |
-| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis
-dengan `now()` |
+| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis dengan `now()` |
 | `nama` | `text` | Nama pengirim |
 | `email` | `text` | Email pengirim |
 | `pesan` | `text` | Isi pesan |
@@ -45,8 +40,7 @@ Daftar keahlian Andi Pratama.
 | Kolom | Tipe | Keterangan |
 | --- | --- | --- |
 | `id` | `int8` | Primary key, nomor otomatis 1, 2, 3, ... |
-| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis
-dengan `now()` |
+| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis dengan `now()` |
 | `nama` | `text` | Nama keahlian |
 | `level` | `text` | Dasar, Menengah, atau Mahir |
 RLS aktif. Policy `Pengunjung boleh membaca keahlian`: peran `anon`
