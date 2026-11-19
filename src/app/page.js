@@ -4,6 +4,7 @@ import ProyekCard from "@/components/ProyekCard";
 import SkillCard from "@/components/SkillCard";
 import { buttonVariants } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
+import { proyek } from "@/data/proyek";
 
 export const metadata = {
   title: "Beranda",
@@ -16,11 +17,7 @@ export default async function Home() {
     .from("skills")
     .select("*")
     .order("id");
-  const { data: proyekTerbaru, error } = await supabase
-    .from("projects")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(3);
+  const proyekTerbaru = proyek.slice(0, 3);
 
   return (
     <main className="mx-auto w-full min-w-0 max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
@@ -50,19 +47,7 @@ export default async function Home() {
           Proyek Terbaru
         </h2>
 
-        {error && (
-          <p className="rounded-xl border border-dashed border-input p-6 text-center text-aksen">
-            Proyek terbaru gagal dimuat: {error.message}
-          </p>
-        )}
-
-        {!error && (!proyekTerbaru || proyekTerbaru.length === 0) && (
-          <p className="rounded-xl border border-dashed border-input p-6 text-center text-muted-foreground">
-            Belum ada proyek di database.
-          </p>
-        )}
-
-        {!error && proyekTerbaru && proyekTerbaru.length > 0 && (
+        {proyekTerbaru.length > 0 && (
           <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {proyekTerbaru.map((item) => (
               <ProyekCard key={item.slug} proyek={item} />

@@ -2,30 +2,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ambilGambarProyek } from "@/lib/gambar-proyek";
 
 export default function ProyekCard({ proyek }) {
-  return (
-    <Link href={`/proyek/${proyek.slug}`} className="block rounded-xl hover:shadow-md">
+  const gambar = ambilGambarProyek(proyek);
 
-      <Card className="h-full">
-        {proyek.gambar_url && (
+  return (
+    <Link
+      href={`/proyek/${proyek.slug}`}
+      className="block h-full rounded-xl transition-shadow hover:shadow-md"
+    >
+      <Card className="h-full w-full">
+        {gambar && (
           <Image
-            src={proyek.gambar_url}
+            src={gambar}
             alt={`Tangkapan layar ${proyek.judul}`}
             width={640}
             height={420}
-            loading="eager"
-            className="h-auto w-full"
+            className="aspect-[16/10] w-full object-cover"
           />
         )}
-      <CardHeader>
-        <Badge>{proyek.kategori}</Badge>
-        <CardTitle className="text-lg text-primary">{proyek.judul}</CardTitle>
-        <CardDescription>{proyek.deskripsi}</CardDescription>
-      </CardHeader>
-    </Card>
-  </Link>
-  
-);
+        <CardHeader className="flex-1 content-start">
+          <Badge className="w-fit">{proyek.kategori}</Badge>
+          <CardTitle className="line-clamp-2 min-h-14 text-lg text-primary">
+            {proyek.judul}
+          </CardTitle>
+          <CardDescription className="line-clamp-3 min-h-[4.5rem]">
+            {proyek.deskripsi}
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
+  );
 }
        

@@ -4,7 +4,7 @@ import { useState } from "react";
 import ProyekCard from "@/components/ProyekCard";
 import { Button } from "@/components/ui/button";
 
-const daftarKategori = ["Semua", "HTML", "CSS", "Next.js"];
+const daftarKategori = ["Semua", "HTML", "CSS", "JavaScript", "Next.js"];
 
 export default function FilterProyek({ proyek = [] }) {
   const [kategori, setKategori] = useState("Semua");

@@ -1,5 +1,35 @@
 export const proyek = [
   {
+    slug: "kalkulator-sederhana",
+    judul: "Kalkulator Sederhana",
+    kategori: "JavaScript",
+    tahun: "2026",
+    gambar: "/proyek/kalkulator-sederhana.png",
+    deskripsi:
+      "Aplikasi kalkulator sederhana untuk melakukan operasi hitung dasar.",
+    fitur: [
+      "Melakukan operasi penjumlahan, pengurangan, perkalian, dan pembagian",
+      "Memasukkan angka melalui tombol kalkulator",
+    ],
+    teknologi: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    slug: "portofolio-nextjs",
+    judul: "Portofolio Pribadi",
+    kategori: "Next.js",
+    tahun: "2026",
+    gambar: "/proyek/portofolio-indra.png",
+    deskripsi:
+      "Website portofolio responsif untuk memperkenalkan diri, menampilkan keahlian, dan membagikan proyek.",
+    fitur: [
+      "Halaman beranda dengan profil dan pengenalan diri",
+      "Daftar proyek dengan tampilan kartu",
+      "Tampilan responsif untuk berbagai ukuran layar",
+      "Mode terang dan gelap",
+    ],
+    teknologi: ["Next.js", "React", "Tailwind CSS"],
+  },
+  {
     slug: "petugasku",
     judul: "PetugasKu",
     kategori: "UI/UX Design",
