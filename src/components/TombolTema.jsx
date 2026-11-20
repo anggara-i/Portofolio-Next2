@@ -12,9 +12,9 @@ export default function TombolTema() {
 
   return (
     <button
-      type="outline"
+      type="button"
       onClick={gantiTema}
-      className="border-white bg-transparent text-white hover:bg-aksen hover:text-white">
+      className="rounded-lg border border-white bg-transparent px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
       {gelap ? "Mode Terang" : "Mode Gelap"}
     </button>
   );

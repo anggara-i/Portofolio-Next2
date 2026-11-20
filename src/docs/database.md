@@ -18,8 +18,7 @@ Daftar proyek portofolio Andi Pratama.
 | `fitur` | `text[]` | Daftar hal yang dipelajari (array teks) |
 | `gambar_url` | `text` | Alamat gambar di folder `public`, misalnya
 `/proyek/proyek-profil.png` |
-RLS aktif. Policy `Pengunjung boleh membaca proyek`: peran `anon`
-boleh `select` semua baris.
+RLS aktif. Policy `Pengunjung boleh membaca proyek`: peran `anon` boleh `select` semua baris.
 
 ## Tabel `messages`
 Pesan dari form kontak.
@@ -43,5 +42,20 @@ Daftar keahlian Andi Pratama.
 | `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis dengan `now()` |
 | `nama` | `text` | Nama keahlian |
 | `level` | `text` | Dasar, Menengah, atau Mahir |
-RLS aktif. Policy `Pengunjung boleh membaca keahlian`: peran `anon`
-boleh `select` semua baris.
+RLS aktif. Policy `Pengunjung boleh membaca keahlian`: peran `anon` boleh `select` semua baris.
+
+## Tabel `buku_tamu`
+Pesan publik dari halaman Buku Tamu. Dibuat dengan SQL `create
+table` di SQL Editor.
+| Kolom | Tipe | Keterangan |
+| --- | --- | --- |
+| `id` | `int8` | Primary key, nomor otomatis 1, 2, 3, ... |
+| `created_at` | `timestamptz` | Waktu baris dibuat, terisi otomatis dengan `now()` |
+| `nama` | `text` | Nama pengirim (wajib) |
+| `pesan` | `text` | Isi pesan (wajib) |
+| `disematkan` | `bool` | `true` jika pesan disematkan di atas, bawaan `false` |
+
+RLS aktif. Policy `Pengunjung boleh membaca buku tamu` (`select`)
+dan `Pengunjung boleh menulis buku tamu`
+(`insert`) untuk peran `anon`. Mengubah dan menghapus pesan hanya
+lewat halaman `/kelola` dengan secret key.
